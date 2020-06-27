@@ -10,24 +10,24 @@ class TransitionEntry extends React.Component {
 
   onRemove(e) {
     this.props.onRemove({
-      stateIndex: this.props.stateIndex,
-      transitionIndex: this.props.transitionIndex,
+      stateIndex: parseInt(this.props.stateIndex),
+      transitionIndex: parseInt(this.props.transitionIndex),
     });
   }
 
   onDirectionChange(e) {
     this.props.onTransitionDirectionChange({
-      stateIndex: this.props.stateIndex,
-      transitionIndex: this.props.transitionIndex,
+      stateIndex: parseInt(this.props.stateIndex),
+      transitionIndex: parseInt(this.props.transitionIndex),
       direction: e.target.value,
     });
   }
 
   onStateChange(e) {
     this.props.onTransitionStateChange({
-      stateIndex: this.props.stateIndex,
-      transitionIndex: this.props.transitionIndex,
-      nextState: e.target.value,
+      stateIndex: parseInt(this.props.stateIndex),
+      transitionIndex: parseInt(this.props.transitionIndex),
+      nextState: parseInt(e.target.value),
     });
   }
 
@@ -66,7 +66,15 @@ class TransitionEntry extends React.Component {
           >
             {Array.from(this.props.states.keys()).map((stateIndex) => {
               let state = this.props.states.get(stateIndex);
-              return <option value={state.key}>{state.name}</option>;
+              if (state.key === this.props.nextState) {
+                return (
+                  <option value={state.key} selected>
+                    {state.name}
+                  </option>
+                );
+              } else {
+                return <option value={state.key}>{state.name}</option>;
+              }
             })}
           </select>
         </td>

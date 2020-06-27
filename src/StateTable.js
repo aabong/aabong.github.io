@@ -49,11 +49,11 @@ class StateTable extends React.Component {
 
   onAddTransition = (data) => {
     this.state.states.get(data.stateIndex).transitions.set(data.key, {
-      state: data.stateIndex,
-      key: data.key,
+      state: parseInt(data.stateIndex),
+      key: parseInt(data.key),
       image: data.image,
       direction: data.direction,
-      nextState: data.stateIndex,
+      nextState: parseInt(data.stateIndex),
     });
     this.setState(this.state);
   };
@@ -73,6 +73,9 @@ class StateTable extends React.Component {
   };
 
   onTransitionStateChange = (data) => {
+    this.state.states
+      .get(data.stateIndex)
+      .transitions.get(data.transitionIndex).nextState = data.nextState;
     this.setState(this.state);
   };
 

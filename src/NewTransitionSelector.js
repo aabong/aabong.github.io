@@ -37,8 +37,8 @@ class NewTransitionSelector extends React.Component {
     this.setState({ anchorEl: null });
     if (index) {
       this.props.onAddTransition({
-        stateIndex: this.props.stateIndex,
-        key: index[0],
+        stateIndex: parseInt(this.props.stateIndex),
+        key: parseInt(index[0]),
         image: index[1],
         direction: 'stay',
       });
