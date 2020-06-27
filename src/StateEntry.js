@@ -36,6 +36,9 @@ class StateEntry extends React.Component {
                 transitionIndex={transition.key}
                 image={transition.image}
                 onRemove={this.props.onRemoveTransition}
+                onTransitionDirectionChange={
+                  this.props.onTransitionDirectionChange
+                }
               />
             );
           })}

@@ -55,6 +55,13 @@ class StateTable extends React.Component {
     this.setState(this.state);
   };
 
+  onTransitionDirectionChange = (data) => {
+    this.state.states
+      .get(data.stateIndex)
+      .transitions.get(data.transitionIndex).direction = data.direction;
+    this.setState(this.state);
+  };
+
   render() {
     return (
       <table className='State-Table'>
@@ -86,6 +93,7 @@ class StateTable extends React.Component {
                 onAcceptChange={this.onAcceptChange(index)}
                 onNewTransition={this.onNewTransition}
                 onRemoveTransition={this.onRemoveTransition}
+                onTransitionDirectionChange={this.onTransitionDirectionChange}
               />
             );
           })}

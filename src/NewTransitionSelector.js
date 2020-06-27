@@ -40,7 +40,7 @@ class NewTransitionSelector extends React.Component {
         stateIndex: this.props.stateIndex,
         key: index[0],
         image: index[1],
-        direction: 0,
+        direction: 'stay',
       });
     }
   };

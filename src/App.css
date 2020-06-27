@@ -25,3 +25,7 @@
 .Transition-Table .Transition-Row {
   width: 100%;
 }
+
+.Transition-Direction {
+  min-width: 70px;
+}
