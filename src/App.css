@@ -1,14 +1,27 @@
 .App {
   margin: auto;
   width: 75%;
+  margin: 100px auto 100px auto;
+}
+
+.Add-State,
+.Remove-State,
+.Remove-Transition {
+  float: right;
 }
 
 .State-Table {
   border: 1px solid black;
+  border-spacing: 0;
+  border-collapse: collapse;
   width: 300px;
 }
 
 .State-Table .State-Row {
   border: 1px solid black;
-  min-height: 50px;
+}
+
+.Transition-Table,
+.Transition-Table .Transition-Row {
+  width: 100%;
 }
