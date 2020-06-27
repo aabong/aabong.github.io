@@ -24,6 +24,15 @@ class StateTable extends React.Component {
   }
 
   onRemoveState = (index) => () => {
+    this.state.states.forEach((state, stateKey, map) => {
+      if (stateKey !== index) {
+        state.transitions.forEach((transition, transitionKey, map) => {
+          if (transition.nextState === index) {
+            transition.nextState = stateKey;
+          }
+        });
+      }
+    });
     this.state.states.delete(index);
     this.setState(this.state);
   };
@@ -38,12 +47,13 @@ class StateTable extends React.Component {
     this.setState(this.state);
   };
 
-  onNewTransition = (data) => {
+  onAddTransition = (data) => {
     this.state.states.get(data.stateIndex).transitions.set(data.key, {
+      state: data.stateIndex,
       key: data.key,
       image: data.image,
       direction: data.direction,
-      nextState: data.state,
+      nextState: data.stateIndex,
     });
     this.setState(this.state);
   };
@@ -59,6 +69,10 @@ class StateTable extends React.Component {
     this.state.states
       .get(data.stateIndex)
       .transitions.get(data.transitionIndex).direction = data.direction;
+    this.setState(this.state);
+  };
+
+  onTransitionStateChange = (data) => {
     this.setState(this.state);
   };
 
@@ -87,13 +101,15 @@ class StateTable extends React.Component {
                 stateIndex={index}
                 name={state.name}
                 accept={state.isAccept}
+                states={this.state.states}
                 transitions={state.transitions}
                 onRemove={this.onRemoveState(index)}
                 onNameChange={this.onStateNameChange(index)}
                 onAcceptChange={this.onAcceptChange(index)}
-                onNewTransition={this.onNewTransition}
+                onAddTransition={this.onAddTransition}
                 onRemoveTransition={this.onRemoveTransition}
                 onTransitionDirectionChange={this.onTransitionDirectionChange}
+                onTransitionStateChange={this.onTransitionStateChange}
               />
             );
           })}

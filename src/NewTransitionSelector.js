@@ -36,7 +36,7 @@ class NewTransitionSelector extends React.Component {
   handleClose = (index) => () => {
     this.setState({ anchorEl: null });
     if (index) {
-      this.props.onNewTransition({
+      this.props.onAddTransition({
         stateIndex: this.props.stateIndex,
         key: index[0],
         image: index[1],

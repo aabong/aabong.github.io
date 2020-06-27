@@ -29,3 +29,9 @@
 .Transition-Direction {
   min-width: 70px;
 }
+
+.Next-State-Transition {
+  width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

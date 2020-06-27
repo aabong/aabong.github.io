@@ -5,6 +5,7 @@ class TransitionEntry extends React.Component {
     super(props);
     this.onRemove = this.onRemove.bind(this);
     this.onDirectionChange = this.onDirectionChange.bind(this);
+    this.onStateChange = this.onStateChange.bind(this);
   }
 
   onRemove(e) {
@@ -22,6 +23,14 @@ class TransitionEntry extends React.Component {
     });
   }
 
+  onStateChange(e) {
+    this.props.onTransitionStateChange({
+      stateIndex: this.props.stateIndex,
+      transitionIndex: this.props.transitionIndex,
+      nextState: e.target.value,
+    });
+  }
+
   render() {
     return (
       <tr class='Transition-Row'>
@@ -35,18 +44,30 @@ class TransitionEntry extends React.Component {
             onChange={this.onDirectionChange}
           >
             <option value='stay'>Stay</option>
-            {[0, 2, 3, 4, 8, 9, 10, 12].includes(
-              this.props.transitionIndex
-            ) && <option value='left'>Left</option>}
-            {[0, 1, 3, 4, 6, 7, 10, 13].includes(
-              this.props.transitionIndex
-            ) && <option value='down'>Down</option>}
-            {[0, 1, 2, 4, 5, 7, 9, 14].includes(this.props.transitionIndex) && (
+            {(this.props.transitionIndex & 1) === 0 && (
+              <option value='left'>Left</option>
+            )}
+            {(this.props.transitionIndex & 2) === 0 && (
+              <option value='down'>Down</option>
+            )}
+            {(this.props.transitionIndex & 4) === 0 && (
               <option value='right'>Right</option>
             )}
-            {[0, 1, 2, 3, 5, 6, 8, 11].includes(this.props.transitionIndex) && (
+            {(this.props.transitionIndex & 8) === 0 && (
               <option value='up'>Up</option>
             )}
+          </select>
+        </td>
+        <td>
+          <select
+            className='Next-State-Transition'
+            name='nextState'
+            onChange={this.onStateChange}
+          >
+            {Array.from(this.props.states.keys()).map((stateIndex) => {
+              let state = this.props.states.get(stateIndex);
+              return <option value={state.key}>{state.name}</option>;
+            })}
           </select>
         </td>
         <td>
