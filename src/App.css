@@ -1,5 +1,6 @@
 .App {
   margin: auto;
+  min-width: 1000px;
   width: 75%;
   margin: 100px auto 100px auto;
 }
@@ -15,6 +16,7 @@
   border-spacing: 0;
   border-collapse: collapse;
   width: 300px;
+  float: left;
 }
 
 .State-Table .State-Row {
@@ -34,4 +36,44 @@
   width: 130px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.Grid-Container {
+  min-width: 500px;
+  float: right;
+}
+
+.Grid {
+  border: 1px solid black;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+.Grid tr,
+.Grid td {
+  border: 1px solid black;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.Grid td {
+  width: 20px;
+  height: 20px;
+}
+
+.Grid td[top] {
+  border-top: 5px solid black;
+}
+
+.Grid td[left] {
+  border-left: 5px solid black;
+}
+
+.Grid td[right] {
+  border-right: 5px solid black;
+}
+
+.Grid td[bottom] {
+  border-bottom: 5px solid black;
 }
