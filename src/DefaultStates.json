@@ -2,7 +2,6 @@
   [
     0,
     {
-      "key": 0,
       "name": "Go Left",
       "isAccept": false,
       "transitions": [
@@ -10,7 +9,6 @@
           0,
           {
             "state": 0,
-            "key": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -19,7 +17,6 @@
           2,
           {
             "state": 0,
-            "key": 2,
             "direction": "Left",
             "nextState": 0
           }
@@ -28,7 +25,6 @@
           4,
           {
             "state": 0,
-            "key": 4,
             "direction": "Left",
             "nextState": 0
           }
@@ -37,7 +33,6 @@
           6,
           {
             "state": 0,
-            "key": 6,
             "direction": "Left",
             "nextState": 0
           }
@@ -46,7 +41,6 @@
           8,
           {
             "state": 0,
-            "key": 8,
             "direction": "Left",
             "nextState": 0
           }
@@ -55,7 +49,6 @@
           10,
           {
             "state": 0,
-            "key": 10,
             "direction": "Left",
             "nextState": 0
           }
@@ -64,7 +57,6 @@
           12,
           {
             "state": 0,
-            "key": 12,
             "direction": "Left",
             "nextState": 0
           }
@@ -73,7 +65,6 @@
           14,
           {
             "state": 0,
-            "key": 14,
             "direction": "Left",
             "nextState": 0
           }
@@ -82,7 +73,6 @@
           1,
           {
             "state": 0,
-            "key": 1,
             "direction": "Down",
             "nextState": 1
           }
@@ -91,7 +81,6 @@
           3,
           {
             "state": 0,
-            "key": 3,
             "direction": "Right",
             "nextState": 2
           }
@@ -100,7 +89,6 @@
           5,
           {
             "state": 0,
-            "key": 5,
             "direction": "Down",
             "nextState": 1
           }
@@ -109,7 +97,6 @@
           7,
           {
             "state": 0,
-            "key": 7,
             "direction": "Up",
             "nextState": 3
           }
@@ -118,7 +105,6 @@
           9,
           {
             "state": 0,
-            "key": 9,
             "direction": "Down",
             "nextState": 1
           }
@@ -127,7 +113,6 @@
           11,
           {
             "state": 0,
-            "key": 11,
             "direction": "Right",
             "nextState": 2
           }
@@ -136,7 +121,6 @@
           13,
           {
             "state": 0,
-            "key": 13,
             "direction": "Down",
             "nextState": 1
           }
@@ -145,7 +129,6 @@
           15,
           {
             "state": 0,
-            "key": 15,
             "direction": "Stay",
             "nextState": 6
           }
@@ -156,7 +139,6 @@
   [
     1,
     {
-      "key": 1,
       "name": "Go Down",
       "isAccept": false,
       "transitions": [
@@ -164,7 +146,6 @@
           1,
           {
             "state": 1,
-            "key": 1,
             "direction": "Down",
             "nextState": 1
           }
@@ -173,7 +154,6 @@
           3,
           {
             "state": 1,
-            "key": 3,
             "direction": "Right",
             "nextState": 2
           }
@@ -182,7 +162,6 @@
           5,
           {
             "state": 1,
-            "key": 5,
             "direction": "Down",
             "nextState": 1
           }
@@ -191,7 +170,6 @@
           7,
           {
             "state": 1,
-            "key": 7,
             "direction": "Up",
             "nextState": 3
           }
@@ -202,7 +180,6 @@
   [
     2,
     {
-      "key": 2,
       "name": "Go Right",
       "isAccept": false,
       "transitions": [
@@ -210,7 +187,6 @@
           2,
           {
             "state": 2,
-            "key": 2,
             "direction": "Right",
             "nextState": 2
           }
@@ -219,7 +195,6 @@
           6,
           {
             "state": 2,
-            "key": 6,
             "direction": "Up",
             "nextState": 3
           }
@@ -228,7 +203,6 @@
           10,
           {
             "state": 2,
-            "key": 10,
             "direction": "Right",
             "nextState": 2
           }
@@ -237,7 +211,6 @@
           14,
           {
             "state": 2,
-            "key": 14,
             "direction": "Left",
             "nextState": 4
           }
@@ -248,7 +221,6 @@
   [
     3,
     {
-      "key": 3,
       "name": "Go Up",
       "isAccept": false,
       "transitions": [
@@ -256,7 +228,6 @@
           4,
           {
             "state": 3,
-            "key": 4,
             "direction": "Up",
             "nextState": 3
           }
@@ -265,7 +236,6 @@
           12,
           {
             "state": 3,
-            "key": 12,
             "direction": "Left",
             "nextState": 4
           }
@@ -274,7 +244,6 @@
           5,
           {
             "state": 3,
-            "key": 5,
             "direction": "Up",
             "nextState": 3
           }
@@ -283,7 +252,6 @@
           13,
           {
             "state": 3,
-            "key": 13,
             "direction": "Down",
             "nextState": 5
           }
@@ -294,7 +262,6 @@
   [
     4,
     {
-      "key": 4,
       "name": "Go Left Again",
       "isAccept": false,
       "transitions": [
@@ -302,7 +269,6 @@
           8,
           {
             "state": 4,
-            "key": 8,
             "direction": "Left",
             "nextState": 4
           }
@@ -311,7 +277,6 @@
           9,
           {
             "state": 4,
-            "key": 9,
             "direction": "Down",
             "nextState": 5
           }
@@ -320,7 +285,6 @@
           10,
           {
             "state": 4,
-            "key": 10,
             "direction": "Left",
             "nextState": 4
           }
@@ -329,7 +293,6 @@
           11,
           {
             "state": 4,
-            "key": 11,
             "direction": "Stay",
             "nextState": 6
           }
@@ -340,7 +303,6 @@
   [
     5,
     {
-      "key": 5,
       "name": "Go Down Again",
       "isAccept": false,
       "transitions": [
@@ -348,7 +310,6 @@
           1,
           {
             "state": 5,
-            "key": 1,
             "direction": "Down",
             "nextState": 5
           }
@@ -357,7 +318,6 @@
           3,
           {
             "state": 5,
-            "key": 3,
             "direction": "Stay",
             "nextState": 6
           }
@@ -366,7 +326,6 @@
           5,
           {
             "state": 5,
-            "key": 5,
             "direction": "Down",
             "nextState": 5
           }
@@ -375,7 +334,6 @@
           7,
           {
             "state": 5,
-            "key": 7,
             "direction": "Stay",
             "nextState": 6
           }
@@ -386,7 +344,6 @@
   [
     6,
     {
-      "key": 6,
       "name": "Done",
       "isAccept": true,
       "transitions": []

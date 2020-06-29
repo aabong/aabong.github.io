@@ -46,7 +46,7 @@ class StateTable extends React.Component {
             })}
           </tbody>
         </table>
-        <button>Export States</button>
+        <button onClick={this.props.onExportStates}>Export States</button>
         <p>todo: Import states function + validation</p>
       </div>
     );

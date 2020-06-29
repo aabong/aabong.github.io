@@ -3,6 +3,7 @@ import StateTable from './StateTable';
 import Grid from './Grid';
 import defaultStates from './DefaultStates.json';
 import './App.css';
+import TransitionEntry from './TransitionEntry';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends React.Component {
     }
     this.state.wallData = wallData;
 
+    this.onExportStates = this.onExportStates.bind(this);
     this.onMoveRobot = this.onMoveRobot.bind(this);
     this.onChangeWalls = this.onChangeWalls.bind(this);
     this.onChangeMode = this.onChangeMode.bind(this);
@@ -40,7 +42,11 @@ class App extends React.Component {
   convertJSONToMap(json) {
     let map = new Map(json);
     for (let entry of map.entries()) {
+      entry[1].key = entry[0];
       entry[1].transitions = new Map(entry[1].transitions);
+      for (let transitionEntry of entry[1].transitions) {
+        transitionEntry[1].key = transitionEntry[0];
+      }
     }
 
     return map;
@@ -146,6 +152,30 @@ class App extends React.Component {
       .get(data.stateIndex)
       .transitions.get(data.transitionIndex).nextState = data.nextState;
     this.setState(this.state);
+  };
+
+  onExportStates = (e) => {
+    const jsonMap = new Map();
+    for (let state of this.state.states) {
+      const transitions = [];
+      for (let transition of state[1].transitions) {
+        const transitionCopy = JSON.parse(JSON.stringify(transition[1]));
+        delete transitionCopy.key;
+        transitions.push([transition[0], transitionCopy]);
+      }
+      const stateCopy = JSON.parse(JSON.stringify(state[1]));
+      delete stateCopy.key;
+      stateCopy.transitions = transitions;
+      jsonMap.set(state[0], stateCopy);
+    }
+    const statesJSON = JSON.stringify([...jsonMap], null, 2);
+    const file = new Blob([statesJSON], { type: 'text/plain' });
+    const element = document.createElement('a');
+    element.href = URL.createObjectURL(file);
+    element.download = 'states.robot';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   // Grid change functions
@@ -313,6 +343,7 @@ class App extends React.Component {
           onRemoveTransition={this.onRemoveTransition}
           onTransitionDirectionChange={this.onTransitionDirectionChange}
           onTransitionStateChange={this.onTransitionStateChange}
+          onExportStates={this.onExportStates}
         />
         <Grid
           states={this.state.states}
