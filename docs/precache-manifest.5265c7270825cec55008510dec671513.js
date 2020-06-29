@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "97d9f99e19a187b72b3aa71126e5c625",
+    "revision": "6192c4f5c91e5911801e90b3828f1ed9",
     "url": "/wall-detecting-robot/index.html"
   },
   {
-    "revision": "dcc7f7ef136a7c20b69d",
+    "revision": "edb09f4d9228a1483e3a",
     "url": "/wall-detecting-robot/static/css/main.696df43c.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wall-detecting-robot/static/js/2.3f2893c0.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dcc7f7ef136a7c20b69d",
-    "url": "/wall-detecting-robot/static/js/main.5a74e96c.chunk.js"
+    "revision": "edb09f4d9228a1483e3a",
+    "url": "/wall-detecting-robot/static/js/main.3cfeb94f.chunk.js"
   },
   {
     "revision": "1ae9d6372f9bc9654bd8",

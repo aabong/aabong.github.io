@@ -52,10 +52,11 @@ class Grid extends React.Component {
     }
     let x = parseInt(e.target.getAttribute('x'));
     let y = parseInt(e.target.getAttribute('y'));
+    let newData;
     if (x >= 0 && x < this.state.width && y >= 0 && y < this.state.height) {
       switch (this.state.mode) {
         case 'build':
-          let newData = this.modifyWallData(
+          newData = this.modifyWallData(
             this.state.wallData,
             x,
             y,
@@ -79,6 +80,28 @@ class Grid extends React.Component {
           });
           break;
         case 'remove':
+          newData = this.modifyWallData(
+            this.state.wallData,
+            x,
+            y,
+            this.state.wallData[y][x] & (15 - this.state.wallSelection)
+          );
+          if ((this.state.wallSelection & 1) > 0 && x > 0) {
+            newData[y][x - 1] = newData[y][x - 1] & 11;
+          }
+          if ((this.state.wallSelection & 2) > 0 && y < this.state.height - 1) {
+            newData[y + 1][x] = newData[y + 1][x] & 7;
+          }
+          if ((this.state.wallSelection & 4) > 0 && x < this.state.width - 1) {
+            newData[y][x + 1] = newData[y][x + 1] & 14;
+          }
+          if ((this.state.wallSelection & 8) > 0 && y > 0) {
+            newData[y - 1][x] = newData[y - 1][x] & 13;
+          }
+
+          this.setState({
+            wallData: newData,
+          });
           break;
         default:
       }
