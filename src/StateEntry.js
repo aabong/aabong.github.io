@@ -19,6 +19,7 @@ class StateEntry extends React.Component {
           type='checkbox'
           name={'accept-' + this.props.stateIndex}
           id={'accept-' + this.props.stateIndex}
+          checked={this.props.accept}
           onChange={this.props.onAcceptChange}
         />
         <label for={'accept-' + this.props.stateIndex}>Is Accept State?</label>
@@ -36,8 +37,8 @@ class StateEntry extends React.Component {
                 states={this.props.states}
                 stateIndex={this.props.stateIndex}
                 transitionIndex={transition.key}
+                direction={transition.direction}
                 nextState={transition.nextState}
-                image={transition.image}
                 onRemove={this.props.onRemoveTransition}
                 onTransitionDirectionChange={
                   this.props.onTransitionDirectionChange

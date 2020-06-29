@@ -1,4 +1,20 @@
 import React from 'react';
+import zero from './0.png';
+import one from './1.png';
+import two from './2.png';
+import three from './3.png';
+import four from './4.png';
+import five from './5.png';
+import six from './6.png';
+import seven from './7.png';
+import eight from './8.png';
+import nine from './9.png';
+import ten from './10.png';
+import eleven from './11.png';
+import twelve from './12.png';
+import thirteen from './13.png';
+import fourteen from './14.png';
+import fifteen from './15.png';
 
 class TransitionEntry extends React.Component {
   constructor(props) {
@@ -32,10 +48,39 @@ class TransitionEntry extends React.Component {
   }
 
   render() {
+    const imageMap = {
+      0: zero,
+      1: one,
+      2: two,
+      3: three,
+      4: four,
+      5: five,
+      6: six,
+      7: seven,
+      8: eight,
+      9: nine,
+      10: ten,
+      11: eleven,
+      12: twelve,
+      13: thirteen,
+      14: fourteen,
+      15: fifteen,
+    };
+    let directionOptions = [
+      [0, 'Stay'],
+      [1, 'Left'],
+      [2, 'Down'],
+      [4, 'Right'],
+      [8, 'Up'],
+    ];
     return (
       <tr class='Transition-Row'>
         <td>
-          <img className='Transition-Image' src={this.props.image} alt='' />
+          <img
+            className='Transition-Image'
+            src={imageMap[this.props.transitionIndex]}
+            alt=''
+          />
         </td>
         <td>
           <select
@@ -43,19 +88,20 @@ class TransitionEntry extends React.Component {
             name='direction'
             onChange={this.onDirectionChange}
           >
-            <option value='stay'>Stay</option>
-            {(this.props.transitionIndex & 1) === 0 && (
-              <option value='left'>Left</option>
-            )}
-            {(this.props.transitionIndex & 2) === 0 && (
-              <option value='down'>Down</option>
-            )}
-            {(this.props.transitionIndex & 4) === 0 && (
-              <option value='right'>Right</option>
-            )}
-            {(this.props.transitionIndex & 8) === 0 && (
-              <option value='up'>Up</option>
-            )}
+            {directionOptions.map((option) => {
+              if ((this.props.transitionIndex & option[0]) === 0) {
+                return (
+                  <option
+                    value={option[1]}
+                    selected={this.props.direction === option[1]}
+                  >
+                    {option[1]}
+                  </option>
+                );
+              } else {
+                return null;
+              }
+            })}
           </select>
         </td>
         <td>

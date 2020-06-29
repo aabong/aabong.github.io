@@ -17,6 +17,7 @@
   border-collapse: collapse;
   width: 300px;
   float: left;
+  margin-bottom: 100px;
 }
 
 .State-Table .State-Row {
@@ -39,7 +40,7 @@
 }
 
 .Grid-Container {
-  min-width: 500px;
+  width: 600px;
   float: right;
 }
 

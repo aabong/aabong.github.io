@@ -1,8 +1,6 @@
 import React from 'react';
-import one from './1.png';
-import two from './2.png';
-import four from './4.png';
-import eight from './8.png';
+import GridTable from './GridTable';
+import GridOptions from './GridOptions';
 
 class Grid extends React.Component {
   constructor(props) {
@@ -144,114 +142,28 @@ class Grid extends React.Component {
   }
 
   render() {
-    let rows = Array(this.state.height)
-      .fill()
-      .map((x, i) => i);
-    let columns = Array(this.state.width)
-      .fill()
-      .map((y, j) => j);
     return (
       <div className='Grid-Container'>
-        <table className='Grid'>
-          {rows.map((i) => (
-            <tr key={i}>
-              {columns.map((j) => (
-                <td
-                  key={j}
-                  x={j}
-                  y={i}
-                  {...(i === this.state.robotY && j === this.state.robotX
-                    ? { robot: '' }
-                    : {})}
-                  {...(i === 0 || (this.state.wallData[i][j] & 8) > 0
-                    ? { top: '' }
-                    : {})}
-                  {...(i === this.state.height - 1 ||
-                  (this.state.wallData[i][j] & 2) > 0
-                    ? { bottom: '' }
-                    : {})}
-                  {...(j === 0 || (this.state.wallData[i][j] & 1) > 0
-                    ? { left: '' }
-                    : {})}
-                  {...(j === this.state.width - 1 ||
-                  (this.state.wallData[i][j] & 4) > 0
-                    ? { right: '' }
-                    : {})}
-                  onMouseDown={this.onMoveRobot}
-                  onMouseOver={this.onChangeWalls}
-                  onDragOver={this.onChangeWalls}
-                ></td>
-              ))}
-            </tr>
-          ))}
-        </table>
-        <div>
-          <input
-            type='radio'
-            id='move'
-            name='mode'
-            value='move'
-            checked={this.state.mode === 'move'}
-            onChange={this.onChangeMode}
-          />
-          <label for='move'>Move Robot</label>
-          <input
-            type='radio'
-            id='build'
-            name='mode'
-            value='build'
-            checked={this.state.mode === 'build'}
-            onChange={this.onChangeMode}
-          />
-          <label for='build'>Build Walls</label>
-          <input
-            type='radio'
-            id='remove'
-            name='mode'
-            value='remove'
-            checked={this.state.mode === 'remove'}
-            onChange={this.onChangeMode}
-          />
-          <label for='remove'>Remove Walls</label>
-        </div>
-        <div>
-          <input
-            type='checkbox'
-            id='left'
-            value='1'
-            onChange={this.onWallSelectionChanged}
-          />
-          <label for='left'>
-            <img src={one} alt='' />
-          </label>
-          <input
-            type='checkbox'
-            id='bottom'
-            value='2'
-            onChange={this.onWallSelectionChanged}
-          />
-          <label for='bottom'>
-            <img src={two} alt='' />
-          </label>
-          <input
-            type='checkbox'
-            id='right'
-            value='4'
-            onChange={this.onWallSelectionChanged}
-          />
-          <label for='right'>
-            <img src={four} alt='' />
-          </label>
-          <input
-            type='checkbox'
-            id='top'
-            value='8'
-            onChange={this.onWallSelectionChanged}
-          />
-          <label for='top'>
-            <img src={eight} alt='' />
-          </label>
-        </div>
+        <GridTable
+          width={this.state.width}
+          height={this.state.height}
+          robotX={this.state.robotX}
+          robotY={this.state.robotY}
+          wallData={this.state.wallData}
+          onMoveRobot={this.onMoveRobot}
+          onChangeWalls={this.onChangeWalls}
+        />
+        <GridOptions
+          mode={this.state.mode}
+          onChangeMode={this.onChangeMode}
+          onWallSelectionChanged={this.onWallSelectionChanged}
+        />
+        <p>
+          Click on any cell in the grid to position the robot. You can build and
+          remove walls by holding and dragging the cursor. You can pick which
+          wall sides should be built or removed with the check boxes. The robot
+          can only take 10,000 steps.
+        </p>
       </div>
     );
   }

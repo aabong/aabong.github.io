@@ -38,8 +38,7 @@ class NewTransitionSelector extends React.Component {
     if (index) {
       this.props.onAddTransition({
         stateIndex: parseInt(this.props.stateIndex),
-        key: parseInt(index[0]),
-        image: index[1],
+        key: parseInt(index),
         direction: 'stay',
       });
     }
@@ -82,7 +81,7 @@ class NewTransitionSelector extends React.Component {
             let keys = Array.from(this.props.transitions.keys());
             if (!keys.includes(index[0])) {
               return (
-                <MenuItem key={index} onClick={this.handleClose(index)}>
+                <MenuItem key={index} onClick={this.handleClose(index[0])}>
                   <img src={index[1]} alt='' />
                 </MenuItem>
               );

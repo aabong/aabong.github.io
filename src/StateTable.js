@@ -2,83 +2,6 @@ import React from 'react';
 import StateEntry from './StateEntry';
 
 class StateTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { states: new Map() };
-    this.onAddState = this.onAddState.bind(this);
-    this.onRemoveState = this.onRemoveState.bind(this);
-  }
-
-  onAddState() {
-    let keys = Array.from(this.state.states.keys());
-    let index = this.state.states.size === 0 ? 0 : keys[keys.length - 1] + 1;
-    this.setState({
-      states: this.state.states.set(index, {
-        key: index,
-        name: 'New State',
-        isAccept: false,
-        isCurrentState: false,
-        transitions: new Map(),
-      }),
-    });
-  }
-
-  onRemoveState = (index) => () => {
-    this.state.states.forEach((state, stateKey, map) => {
-      if (stateKey !== index) {
-        state.transitions.forEach((transition, transitionKey, map) => {
-          if (transition.nextState === index) {
-            transition.nextState = stateKey;
-          }
-        });
-      }
-    });
-    this.state.states.delete(index);
-    this.setState(this.state);
-  };
-
-  onStateNameChange = (index) => (e) => {
-    this.state.states.get(index).name = e.target.value;
-    this.setState(this.state);
-  };
-
-  onAcceptChange = (index) => (e) => {
-    this.state.states.get(index).isAccept = e.target.checked;
-    this.setState(this.state);
-  };
-
-  onAddTransition = (data) => {
-    this.state.states.get(data.stateIndex).transitions.set(data.key, {
-      state: parseInt(data.stateIndex),
-      key: parseInt(data.key),
-      image: data.image,
-      direction: data.direction,
-      nextState: parseInt(data.stateIndex),
-    });
-    this.setState(this.state);
-  };
-
-  onRemoveTransition = (data) => {
-    this.state.states
-      .get(data.stateIndex)
-      .transitions.delete(data.transitionIndex);
-    this.setState(this.state);
-  };
-
-  onTransitionDirectionChange = (data) => {
-    this.state.states
-      .get(data.stateIndex)
-      .transitions.get(data.transitionIndex).direction = data.direction;
-    this.setState(this.state);
-  };
-
-  onTransitionStateChange = (data) => {
-    this.state.states
-      .get(data.stateIndex)
-      .transitions.get(data.transitionIndex).nextState = data.nextState;
-    this.setState(this.state);
-  };
-
   render() {
     return (
       <table className='State-Table'>
@@ -86,17 +9,17 @@ class StateTable extends React.Component {
           States{' '}
           <button
             className='Add-State'
-            onClick={this.onAddState}
+            onClick={this.props.onAddState}
             style={{
-              display: this.state.states.size < 100 ? 'block' : 'none',
+              display: this.props.states.size < 100 ? 'block' : 'none',
             }}
           >
             +
           </button>
         </th>
         <tbody>
-          {Array.from(this.state.states.keys()).map((index) => {
-            let state = this.state.states.get(index);
+          {Array.from(this.props.states.keys()).map((index) => {
+            let state = this.props.states.get(index);
 
             return (
               <StateEntry
@@ -104,15 +27,17 @@ class StateTable extends React.Component {
                 stateIndex={index}
                 name={state.name}
                 accept={state.isAccept}
-                states={this.state.states}
+                states={this.props.states}
                 transitions={state.transitions}
-                onRemove={this.onRemoveState(index)}
-                onNameChange={this.onStateNameChange(index)}
-                onAcceptChange={this.onAcceptChange(index)}
-                onAddTransition={this.onAddTransition}
-                onRemoveTransition={this.onRemoveTransition}
-                onTransitionDirectionChange={this.onTransitionDirectionChange}
-                onTransitionStateChange={this.onTransitionStateChange}
+                onRemove={this.props.onRemoveState(index)}
+                onNameChange={this.props.onStateNameChange(index)}
+                onAcceptChange={this.props.onAcceptChange(index)}
+                onAddTransition={this.props.onAddTransition}
+                onRemoveTransition={this.props.onRemoveTransition}
+                onTransitionDirectionChange={
+                  this.props.onTransitionDirectionChange
+                }
+                onTransitionStateChange={this.props.onTransitionStateChange}
               />
             );
           })}
