@@ -87,6 +87,8 @@ class TransitionEntry extends React.Component {
             className='Transition-Direction'
             name='direction'
             onChange={this.onDirectionChange}
+            disabled={this.props.isRunning}
+            {...(this.props.isRunning ? { value: this.props.direction } : {})}
           >
             {directionOptions.map((option) => {
               if ((this.props.transitionIndex & option[0]) === 0) {
@@ -109,23 +111,28 @@ class TransitionEntry extends React.Component {
             className='Next-State-Transition'
             name='nextState'
             onChange={this.onStateChange}
+            disabled={this.props.isRunning}
+            {...(this.props.isRunning ? { value: this.props.nextState } : {})}
           >
             {Array.from(this.props.states.keys()).map((stateIndex) => {
               let state = this.props.states.get(stateIndex);
-              if (state.key === this.props.nextState) {
-                return (
-                  <option value={state.key} selected>
-                    {state.name}
-                  </option>
-                );
-              } else {
-                return <option value={state.key}>{state.name}</option>;
-              }
+              return (
+                <option
+                  value={state.key}
+                  selected={state.key === this.props.nextState}
+                >
+                  {state.name}
+                </option>
+              );
             })}
           </select>
         </td>
         <td>
-          <button className='Remove-Transition' onClick={this.onRemove}>
+          <button
+            className='Remove-Transition'
+            onClick={this.onRemove}
+            disabled={this.props.isRunning}
+          >
             x
           </button>
         </td>

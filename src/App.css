@@ -11,13 +11,16 @@
   float: right;
 }
 
+.State-Container {
+  float: left;
+  margin-bottom: 100px;
+}
+
 .State-Table {
   border: 1px solid black;
   border-spacing: 0;
   border-collapse: collapse;
   width: 300px;
-  float: left;
-  margin-bottom: 100px;
 }
 
 .State-Table .State-Row {
@@ -27,6 +30,15 @@
 .Transition-Table,
 .Transition-Table .Transition-Row {
   width: 100%;
+}
+
+.Transition-Table th {
+  font-size: 12px;
+}
+
+.Transition-Image {
+  display: block;
+  margin: auto;
 }
 
 .Transition-Direction {

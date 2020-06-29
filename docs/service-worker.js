@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/wall-detecting-robot/precache-manifest.59a87aabdc5ae73b08c4bb8793d881a2.js"
+  "/wall-detecting-robot/precache-manifest.03fc44d0daf23521dadcceed9bd7bb9d.js"
 );
 
 self.addEventListener('message', (event) => {

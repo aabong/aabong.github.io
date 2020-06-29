@@ -34,9 +34,15 @@ class GridTable extends React.Component {
                 (this.props.wallData[i][j] & 4) > 0
                   ? { right: '' }
                   : {})}
-                onMouseDown={this.props.onMoveRobot}
-                onMouseOver={this.props.onChangeWalls}
-                onDragOver={this.props.onChangeWalls}
+                {...(this.props.isRunning
+                  ? {}
+                  : { onMouseDown: this.props.onMoveRobot })}
+                {...(this.props.isRunning
+                  ? {}
+                  : { onMouseOver: this.props.onChangeWalls })}
+                {...(this.props.isRunning
+                  ? {}
+                  : { onDragOver: this.props.onChangeWalls })}
               ></td>
             ))}
           </tr>

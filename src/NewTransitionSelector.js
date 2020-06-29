@@ -52,6 +52,7 @@ class NewTransitionSelector extends React.Component {
             display: this.props.transitions.size < 16 ? 'block' : 'none',
           }}
           onClick={this.handleClick}
+          disabled={this.props.isRunning}
         >
           Add transition
         </Button>
