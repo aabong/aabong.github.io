@@ -170,6 +170,7 @@ class App extends React.Component {
 
   onExportStates = (e) => {
     const jsonMap = new Map();
+    let i = 0;
     for (let state of this.state.states) {
       const transitions = [];
       for (let transition of state[1].transitions) {
@@ -181,7 +182,7 @@ class App extends React.Component {
       const stateCopy = JSON.parse(JSON.stringify(state[1]));
       delete stateCopy.key;
       stateCopy.transitions = transitions;
-      jsonMap.set(state[0], stateCopy);
+      jsonMap.set(i++, stateCopy);
     }
     const statesJSON = JSON.stringify([...jsonMap], null, 2);
     const file = new Blob([statesJSON], { type: 'text/plain' });
