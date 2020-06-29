@@ -2,6 +2,12 @@ import React from 'react';
 
 class GridTable extends React.Component {
   render() {
+    console.log(this.props.states);
+    console.log(this.props.currentState);
+    const accepted =
+      this.props.currentState >= 0 &&
+      this.props.states.get(this.props.currentState).isAccept;
+
     let rows = Array(this.props.height)
       .fill()
       .map((x, i) => i);
@@ -9,7 +15,12 @@ class GridTable extends React.Component {
       .fill()
       .map((y, j) => j);
     return (
-      <table className='Grid'>
+      <table
+        className={
+          'Grid' +
+          (this.props.isFinished ? (accepted ? ' Accept' : ' Reject') : '')
+        }
+      >
         {rows.map((i) => (
           <tr key={i}>
             {columns.map((j) => (

@@ -31,6 +31,7 @@ class StateTable extends React.Component {
                   accept={state.isAccept}
                   states={this.props.states}
                   isRunning={this.props.isRunning}
+                  currentState={this.props.currentState}
                   transitions={state.transitions}
                   onRemove={this.props.onRemoveState(index)}
                   onNameChange={this.props.onStateNameChange(index)}

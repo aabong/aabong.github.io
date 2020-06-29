@@ -3,7 +3,6 @@ import StateTable from './StateTable';
 import Grid from './Grid';
 import defaultStates from './DefaultStates.json';
 import './App.css';
-import TransitionEntry from './TransitionEntry';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +17,8 @@ class App extends React.Component {
       wallSelection: 0,
       steps: [],
       isRunning: false,
+      isFinished: false,
+      currentState: -1,
     };
 
     let wallData = [];
@@ -37,6 +38,7 @@ class App extends React.Component {
     this.onWallSelectionChanged = this.onWallSelectionChanged.bind(this);
     this.onAddState = this.onAddState.bind(this);
     this.onRemoveState = this.onRemoveState.bind(this);
+    this.onSkipToEndClicked = this.onSkipToEndClicked.bind(this);
   }
 
   convertJSONToMap(json) {
@@ -45,6 +47,7 @@ class App extends React.Component {
       entry[1].key = entry[0];
       entry[1].transitions = new Map(entry[1].transitions);
       for (let transitionEntry of entry[1].transitions) {
+        transitionEntry[1].state = entry[0];
         transitionEntry[1].key = transitionEntry[0];
       }
     }
@@ -161,6 +164,7 @@ class App extends React.Component {
       for (let transition of state[1].transitions) {
         const transitionCopy = JSON.parse(JSON.stringify(transition[1]));
         delete transitionCopy.key;
+        delete transitionCopy.state;
         transitions.push([transition[0], transitionCopy]);
       }
       const stateCopy = JSON.parse(JSON.stringify(state[1]));
@@ -329,12 +333,145 @@ class App extends React.Component {
     }
   }
 
+  // Simulation functions
+  stepBackward() {
+    if (this.state.steps.length === 0) {
+      return;
+    }
+
+    this.state.steps.pop();
+  }
+
+  stepForward() {
+    let x =
+      this.state.steps.length === 0
+        ? this.state.robotX
+        : this.state.steps[this.state.steps.length - 1].x;
+    let y =
+      this.state.steps.length === 0
+        ? this.state.robotY
+        : this.state.steps[this.state.steps.length - 1].y;
+    let wallData = this.state.wallData[y][x];
+    if (x === 0) {
+      wallData = wallData | 1;
+    } else if (x === this.state.gridWidth - 1) {
+      wallData = wallData | 4;
+    }
+
+    if (y === 0) {
+      wallData = wallData | 8;
+    } else if (y === this.state.gridHeight - 1) {
+      wallData = wallData | 2;
+    }
+
+    if (this.state.steps.length === 0) {
+      this.state.steps.push({
+        x: x,
+        y: y,
+        state: this.state.states.size === 0 ? -1 : 0,
+      });
+    } else {
+      const currentState = this.state.steps[this.state.steps.length - 1].state;
+      const transition =
+        this.state.states.size === 0
+          ? null
+          : this.state.states.get(currentState).transitions.get(wallData);
+      if (transition) {
+        switch (transition.direction) {
+          case 'Left':
+            x -= 1;
+            break;
+          case 'Down':
+            y += 1;
+            break;
+          case 'Right':
+            x += 1;
+            break;
+          case 'Up':
+            y -= 1;
+            break;
+          default:
+        }
+        this.state.steps.push({
+          x: x,
+          y: y,
+          state: transition.nextState,
+        });
+      } else {
+        this.state.steps.push({
+          x: x,
+          y: y,
+          state: -1,
+        });
+      }
+    }
+  }
+
+  onStepClicked = (isForward) => () => {
+    if (isForward) {
+      this.stepForward();
+    } else {
+      this.stepBackward();
+    }
+
+    if (this.state.steps.length === 0) {
+      this.setState({
+        isFinished: false,
+        currentState: -1,
+      });
+    } else {
+      this.update();
+    }
+  };
+
+  onSkipToEndClicked() {
+    const steps = this.state.steps;
+    while (
+      steps.length < 10000 &&
+      (steps.length === 0 || steps[steps.length - 1].state !== -1)
+    ) {
+      this.stepForward();
+    }
+    this.update();
+  }
+
+  update() {
+    const newStep = this.state.steps[this.state.steps.length - 1];
+    let currentState = newStep.state;
+    if (this.state.steps.length > 1 && currentState === -1) {
+      currentState = this.state.steps[this.state.steps.length - 2].state;
+    }
+    const isFinished =
+      this.state.steps.length === 10000 || newStep.state === -1;
+    this.setState({
+      robotX: newStep.x,
+      robotY: newStep.y,
+      isRunning: true,
+      isFinished: isFinished,
+      currentState: currentState,
+    });
+  }
+
+  onReset = (isSkipToBeginning) => () => {
+    this.setState({
+      robotX:
+        this.state.steps.length > 0 ? this.state.steps[0].x : this.state.robotX,
+      robotY:
+        this.state.steps.length > 0 ? this.state.steps[0].y : this.state.robotY,
+      steps: [],
+      isRunning: isSkipToBeginning,
+      isFinished: false,
+      currentState: -1,
+    });
+  };
+
   render() {
     return (
       <div className='App'>
         <StateTable
           states={this.state.states}
           isRunning={this.state.isRunning}
+          currentState={this.state.currentState}
           onAddState={this.onAddState}
           onRemoveState={this.onRemoveState}
           onStateNameChange={this.onStateNameChange}
@@ -355,11 +492,18 @@ class App extends React.Component {
           mode={this.state.gridAlterationMode}
           wallSelection={this.state.wallSelection}
           isRunning={this.state.isRunning}
+          isFinished={this.state.isFinished}
           steps={this.state.steps}
+          currentState={this.state.currentState}
           onMoveRobot={this.onMoveRobot}
           onChangeWalls={this.onChangeWalls}
           onChangeMode={this.onChangeMode}
           onWallSelectionChanged={this.onWallSelectionChanged}
+          onSkipToBeginningClicked={this.onReset(true)}
+          onStepBackwardClicked={this.onStepClicked(false)}
+          onStepForwardClicked={this.onStepClicked(true)}
+          onSkipToEndClicked={this.onSkipToEndClicked}
+          onStopClicked={this.onReset(false)}
         />
       </div>
     );

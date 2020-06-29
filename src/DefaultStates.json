@@ -8,7 +8,6 @@
         [
           0,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -16,7 +15,6 @@
         [
           2,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -24,7 +22,6 @@
         [
           4,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -32,7 +29,6 @@
         [
           6,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -40,7 +36,6 @@
         [
           8,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -48,7 +43,6 @@
         [
           10,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -56,7 +50,6 @@
         [
           12,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -64,7 +57,6 @@
         [
           14,
           {
-            "state": 0,
             "direction": "Left",
             "nextState": 0
           }
@@ -72,7 +64,6 @@
         [
           1,
           {
-            "state": 0,
             "direction": "Down",
             "nextState": 1
           }
@@ -80,7 +71,6 @@
         [
           3,
           {
-            "state": 0,
             "direction": "Right",
             "nextState": 2
           }
@@ -88,7 +78,6 @@
         [
           5,
           {
-            "state": 0,
             "direction": "Down",
             "nextState": 1
           }
@@ -96,7 +85,6 @@
         [
           7,
           {
-            "state": 0,
             "direction": "Up",
             "nextState": 3
           }
@@ -104,7 +92,6 @@
         [
           9,
           {
-            "state": 0,
             "direction": "Down",
             "nextState": 1
           }
@@ -112,7 +99,6 @@
         [
           11,
           {
-            "state": 0,
             "direction": "Right",
             "nextState": 2
           }
@@ -120,7 +106,6 @@
         [
           13,
           {
-            "state": 0,
             "direction": "Down",
             "nextState": 1
           }
@@ -128,7 +113,6 @@
         [
           15,
           {
-            "state": 0,
             "direction": "Stay",
             "nextState": 6
           }
@@ -145,7 +129,6 @@
         [
           1,
           {
-            "state": 1,
             "direction": "Down",
             "nextState": 1
           }
@@ -153,7 +136,6 @@
         [
           3,
           {
-            "state": 1,
             "direction": "Right",
             "nextState": 2
           }
@@ -161,7 +143,6 @@
         [
           5,
           {
-            "state": 1,
             "direction": "Down",
             "nextState": 1
           }
@@ -169,7 +150,6 @@
         [
           7,
           {
-            "state": 1,
             "direction": "Up",
             "nextState": 3
           }
@@ -186,7 +166,6 @@
         [
           2,
           {
-            "state": 2,
             "direction": "Right",
             "nextState": 2
           }
@@ -194,7 +173,6 @@
         [
           6,
           {
-            "state": 2,
             "direction": "Up",
             "nextState": 3
           }
@@ -202,7 +180,6 @@
         [
           10,
           {
-            "state": 2,
             "direction": "Right",
             "nextState": 2
           }
@@ -210,7 +187,6 @@
         [
           14,
           {
-            "state": 2,
             "direction": "Left",
             "nextState": 4
           }
@@ -227,7 +203,6 @@
         [
           4,
           {
-            "state": 3,
             "direction": "Up",
             "nextState": 3
           }
@@ -235,7 +210,6 @@
         [
           12,
           {
-            "state": 3,
             "direction": "Left",
             "nextState": 4
           }
@@ -243,7 +217,6 @@
         [
           5,
           {
-            "state": 3,
             "direction": "Up",
             "nextState": 3
           }
@@ -251,7 +224,6 @@
         [
           13,
           {
-            "state": 3,
             "direction": "Down",
             "nextState": 5
           }
@@ -268,7 +240,6 @@
         [
           8,
           {
-            "state": 4,
             "direction": "Left",
             "nextState": 4
           }
@@ -276,7 +247,6 @@
         [
           9,
           {
-            "state": 4,
             "direction": "Down",
             "nextState": 5
           }
@@ -284,7 +254,6 @@
         [
           10,
           {
-            "state": 4,
             "direction": "Left",
             "nextState": 4
           }
@@ -292,7 +261,6 @@
         [
           11,
           {
-            "state": 4,
             "direction": "Stay",
             "nextState": 6
           }
@@ -309,7 +277,6 @@
         [
           1,
           {
-            "state": 5,
             "direction": "Down",
             "nextState": 5
           }
@@ -317,7 +284,6 @@
         [
           3,
           {
-            "state": 5,
             "direction": "Stay",
             "nextState": 6
           }
@@ -325,7 +291,6 @@
         [
           5,
           {
-            "state": 5,
             "direction": "Down",
             "nextState": 5
           }
@@ -333,7 +298,6 @@
         [
           7,
           {
-            "state": 5,
             "direction": "Stay",
             "nextState": 6
           }

@@ -5,7 +5,14 @@ import TransitionEntry from './TransitionEntry';
 class StateEntry extends React.Component {
   render() {
     return (
-      <tr className='State-Row'>
+      <tr
+        className={
+          'State-Row' +
+          (this.props.currentState === this.props.stateIndex
+            ? ' Current-State'
+            : '')
+        }
+      >
         <input
           type='text'
           defaultValue={this.props.name}

@@ -87,13 +87,37 @@ class GridOptions extends React.Component {
           </label>
         </div>
         <div>
-          {this.props.isRunning && <p>Step: {this.props.steps.length}</p>}
-          <button disabled={this.props.steps.length === 0}>&lt;&lt;</button>
-          <button disabled={this.props.steps.length === 0}>&lt;</button>
+          <button
+            onClick={this.props.onSkipToBeginningClicked}
+            disabled={this.props.steps.length === 0}
+          >
+            &lt;&lt;
+          </button>
+          <button
+            onClick={this.props.onStepBackwardClicked}
+            disabled={this.props.steps.length === 0}
+          >
+            &lt;
+          </button>
           <button>Play</button>
-          {this.props.isRunning && <button>Stop</button>}
-          <button>&gt;</button>
-          <button>&gt;&gt;</button>
+          <button
+            onClick={this.props.onStepForwardClicked}
+            disabled={this.props.isFinished}
+          >
+            &gt;
+          </button>
+          <button
+            onClick={this.props.onSkipToEndClicked}
+            disabled={this.props.isFinished}
+          >
+            &gt;&gt;
+          </button>
+          {this.props.isRunning && (
+            <button className='Stop' onClick={this.props.onStopClicked}>
+              Stop
+            </button>
+          )}
+          {this.props.isRunning && <p>Step: {this.props.steps.length}</p>}
         </div>
       </div>
     );

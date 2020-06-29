@@ -27,6 +27,10 @@
   border: 1px solid black;
 }
 
+.State-Row.Current-State {
+  background-color: #bff594;
+}
+
 .Transition-Table,
 .Transition-Table .Transition-Row {
   width: 100%;
@@ -61,6 +65,14 @@
   border-spacing: 0;
   border-collapse: collapse;
   margin: auto;
+}
+
+.Grid.Accept {
+  background-color: #bff594;
+}
+
+.Grid.Reject {
+  background-color: #ff9494;
 }
 
 .Grid tr,
