@@ -394,6 +394,9 @@ class App extends React.Component {
       });
     } else {
       const currentState = this.state.steps[this.state.steps.length - 1].state;
+      if (currentState < 0) {
+        return; // failsafe in case of race conditions
+      }
       const transition =
         this.state.states.size === 0
           ? null
