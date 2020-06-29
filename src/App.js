@@ -260,7 +260,7 @@ class App extends React.Component {
           }
           if (
             (this.state.wallSelection & 4) > 0 &&
-            x < this.state.gridHidth - 1
+            x < this.state.gridWidth - 1
           ) {
             newData[y][x + 1] = newData[y][x + 1] | 1;
           }
