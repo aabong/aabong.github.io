@@ -386,7 +386,10 @@ class App extends React.Component {
       this.state.steps.push({
         x: x,
         y: y,
-        state: this.state.states.size === 0 ? -1 : 0,
+        state:
+          this.state.states.size === 0
+            ? -1
+            : Array.from(this.state.states.keys())[0],
       });
     } else {
       const currentState = this.state.steps[this.state.steps.length - 1].state;
