@@ -99,7 +99,13 @@ class GridOptions extends React.Component {
           >
             &lt;
           </button>
-          <button>Play</button>
+          <button onClick={this.props.onPlayClicked}>
+            {this.props.timer
+              ? this.props.isPaused
+                ? 'Resume'
+                : 'Pause'
+              : 'Play'}
+          </button>
           <button
             onClick={this.props.onStepForwardClicked}
             disabled={this.props.isFinished}

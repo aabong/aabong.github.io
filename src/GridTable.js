@@ -2,8 +2,6 @@ import React from 'react';
 
 class GridTable extends React.Component {
   render() {
-    console.log(this.props.states);
-    console.log(this.props.currentState);
     const accepted =
       this.props.currentState >= 0 &&
       this.props.states.get(this.props.currentState).isAccept;
@@ -45,15 +43,16 @@ class GridTable extends React.Component {
                 (this.props.wallData[i][j] & 4) > 0
                   ? { right: '' }
                   : {})}
-                {...(this.props.isRunning
-                  ? {}
-                  : { onMouseDown: this.props.onMoveRobot })}
+                onMouseDown={this.props.onMoveRobot}
                 {...(this.props.isRunning
                   ? {}
                   : { onMouseOver: this.props.onChangeWalls })}
                 {...(this.props.isRunning
                   ? {}
                   : { onDragOver: this.props.onChangeWalls })}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                }}
               ></td>
             ))}
           </tr>

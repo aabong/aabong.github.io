@@ -1,13 +1,17 @@
 import React from 'react';
 import StateTable from './StateTable';
 import Grid from './Grid';
+import { throttle } from 'lodash';
 import defaultStates from './DefaultStates.json';
 import './App.css';
+
+const STEP_LIMIT = 10000;
+const TIMER_INTERVAL = 750;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.STEP_LIMIT = this.state = {
       states: this.convertJSONToMap(defaultStates),
       gridWidth: 25,
       gridHeight: 25,
@@ -17,6 +21,7 @@ class App extends React.Component {
       wallSelection: 0,
       steps: [],
       isRunning: false,
+      isPaused: false,
       isFinished: false,
       currentState: -1,
     };
@@ -38,7 +43,13 @@ class App extends React.Component {
     this.onWallSelectionChanged = this.onWallSelectionChanged.bind(this);
     this.onAddState = this.onAddState.bind(this);
     this.onRemoveState = this.onRemoveState.bind(this);
+    this.onPlayClicked = this.onPlayClicked.bind(this);
     this.onSkipToEndClicked = this.onSkipToEndClicked.bind(this);
+
+    this.throttledWallUpdate = throttle(
+      () => this.setState({ wallData: this.state.wallData }),
+      100
+    );
   }
 
   convertJSONToMap(json) {
@@ -185,6 +196,15 @@ class App extends React.Component {
   // Grid change functions
   onMoveRobot(e) {
     if (this.state.isRunning) {
+      if ((e.buttons & 1) > 0) {
+        this.onStepClicked(true)();
+      } else if ((e.buttons & 2) > 0) {
+        this.onStepClicked(false)();
+      }
+      return;
+    }
+
+    if ((e.buttons & 1) === 0) {
       return;
     }
 
@@ -247,9 +267,8 @@ class App extends React.Component {
             newData[y - 1][x] = newData[y - 1][x] | 2;
           }
 
-          this.setState({
-            wallData: newData,
-          });
+          this.state.wallData = newData;
+          this.throttledWallUpdate();
           break;
         case 'remove':
           newData = this.modifyWallData(
@@ -277,9 +296,8 @@ class App extends React.Component {
             newData[y - 1][x] = newData[y - 1][x] & 13;
           }
 
-          this.setState({
-            wallData: newData,
-          });
+          this.state.wallData = newData;
+          this.throttledWallUpdate();
           break;
         default:
       }
@@ -407,32 +425,56 @@ class App extends React.Component {
     }
   }
 
-  onStepClicked = (isForward) => () => {
+  onStepClicked = (isForward, isManual) => async () => {
+    if (!isManual && this.state.isPaused) {
+      return;
+    }
+
     if (isForward) {
-      this.stepForward();
+      await this.stepForward();
     } else {
-      this.stepBackward();
+      await this.stepBackward();
     }
 
     if (this.state.steps.length === 0) {
-      this.setState({
+      await this.setState({
         isFinished: false,
         currentState: -1,
       });
     } else {
-      this.update();
+      await this.update();
+    }
+
+    if (isManual) {
+      this.resetTimer();
     }
   };
+
+  async onPlayClicked() {
+    const state = this.state;
+    if (state.timer) {
+      this.setState({ isPaused: !state.isPaused });
+    } else {
+      if (this.state.isFinished) {
+        await this.onReset(true)();
+      }
+      this.onStepClicked(true, false)();
+      this.setState({
+        timer: setInterval(this.onStepClicked(true, false), TIMER_INTERVAL),
+      });
+    }
+  }
 
   onSkipToEndClicked() {
     const steps = this.state.steps;
     while (
-      steps.length < 10000 &&
+      steps.length < STEP_LIMIT &&
       (steps.length === 0 || steps[steps.length - 1].state !== -1)
     ) {
       this.stepForward();
     }
     this.update();
+    this.resetTimer();
   }
 
   update() {
@@ -442,7 +484,7 @@ class App extends React.Component {
       currentState = this.state.steps[this.state.steps.length - 2].state;
     }
     const isFinished =
-      this.state.steps.length === 10000 || newStep.state === -1;
+      this.state.steps.length === STEP_LIMIT || newStep.state === -1;
     this.setState({
       robotX: newStep.x,
       robotY: newStep.y,
@@ -450,6 +492,9 @@ class App extends React.Component {
       isFinished: isFinished,
       currentState: currentState,
     });
+    if (isFinished) {
+      this.resetTimer();
+    }
   }
 
   onReset = (isSkipToBeginning) => () => {
@@ -463,7 +508,16 @@ class App extends React.Component {
       isFinished: false,
       currentState: -1,
     });
+
+    this.resetTimer();
   };
+
+  resetTimer() {
+    if (this.state.timer) {
+      clearInterval(this.state.timer);
+      this.setState({ timer: null, isPaused: false });
+    }
+  }
 
   render() {
     return (
@@ -492,16 +546,19 @@ class App extends React.Component {
           mode={this.state.gridAlterationMode}
           wallSelection={this.state.wallSelection}
           isRunning={this.state.isRunning}
+          isPaused={this.state.isPaused}
           isFinished={this.state.isFinished}
           steps={this.state.steps}
           currentState={this.state.currentState}
+          timer={this.state.timer}
           onMoveRobot={this.onMoveRobot}
           onChangeWalls={this.onChangeWalls}
           onChangeMode={this.onChangeMode}
           onWallSelectionChanged={this.onWallSelectionChanged}
           onSkipToBeginningClicked={this.onReset(true)}
-          onStepBackwardClicked={this.onStepClicked(false)}
-          onStepForwardClicked={this.onStepClicked(true)}
+          onStepBackwardClicked={this.onStepClicked(false, true)}
+          onPlayClicked={this.onPlayClicked}
+          onStepForwardClicked={this.onStepClicked(true, true)}
           onSkipToEndClicked={this.onSkipToEndClicked}
           onStopClicked={this.onReset(false)}
         />

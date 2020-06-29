@@ -21,14 +21,17 @@ class Grid extends React.Component {
         />
         <GridOptions
           isRunning={this.props.isRunning}
+          isPaused={this.props.isPaused}
           isFinished={this.props.isFinished}
           steps={this.props.steps}
           mode={this.props.mode}
           wallSelection={this.props.wallSelection}
+          timer={this.props.timer}
           onChangeMode={this.props.onChangeMode}
           onWallSelectionChanged={this.props.onWallSelectionChanged}
           onSkipToBeginningClicked={this.props.onSkipToBeginningClicked}
           onStepBackwardClicked={this.props.onStepBackwardClicked}
+          onPlayClicked={this.props.onPlayClicked}
           onStepForwardClicked={this.props.onStepForwardClicked}
           onSkipToEndClicked={this.props.onSkipToEndClicked}
           onStopClicked={this.props.onStopClicked}
