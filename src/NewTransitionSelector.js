@@ -35,7 +35,7 @@ class NewTransitionSelector extends React.Component {
 
   handleClose = (index) => () => {
     this.setState({ anchorEl: null });
-    if (index) {
+    if (Number.isInteger(index)) {
       this.props.onAddTransition({
         stateIndex: parseInt(this.props.stateIndex),
         key: parseInt(index),

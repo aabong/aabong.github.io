@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wall-detecting-robot/static/css/main.f7103187.chunk.css",
-    "main.js": "/wall-detecting-robot/static/js/main.a1328bf0.chunk.js",
-    "main.js.map": "/wall-detecting-robot/static/js/main.a1328bf0.chunk.js.map",
+    "main.js": "/wall-detecting-robot/static/js/main.ad8ab417.chunk.js",
+    "main.js.map": "/wall-detecting-robot/static/js/main.ad8ab417.chunk.js.map",
     "runtime-main.js": "/wall-detecting-robot/static/js/runtime-main.1822cd1a.js",
     "runtime-main.js.map": "/wall-detecting-robot/static/js/runtime-main.1822cd1a.js.map",
     "static/js/2.8568fd28.chunk.js": "/wall-detecting-robot/static/js/2.8568fd28.chunk.js",
     "static/js/2.8568fd28.chunk.js.map": "/wall-detecting-robot/static/js/2.8568fd28.chunk.js.map",
     "index.html": "/wall-detecting-robot/index.html",
-    "precache-manifest.680218908e6c42ffd574663685653535.js": "/wall-detecting-robot/precache-manifest.680218908e6c42ffd574663685653535.js",
+    "precache-manifest.b3ae2785bc59b06ede8c3d6bf6f9f61d.js": "/wall-detecting-robot/precache-manifest.b3ae2785bc59b06ede8c3d6bf6f9f61d.js",
     "service-worker.js": "/wall-detecting-robot/service-worker.js",
     "static/css/main.f7103187.chunk.css.map": "/wall-detecting-robot/static/css/main.f7103187.chunk.css.map",
     "static/js/2.8568fd28.chunk.js.LICENSE.txt": "/wall-detecting-robot/static/js/2.8568fd28.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1822cd1a.js",
     "static/js/2.8568fd28.chunk.js",
     "static/css/main.f7103187.chunk.css",
-    "static/js/main.a1328bf0.chunk.js"
+    "static/js/main.ad8ab417.chunk.js"
   ]
 }
