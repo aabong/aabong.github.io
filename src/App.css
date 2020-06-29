@@ -58,8 +58,16 @@
 }
 
 .Grid td {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
+  box-sizing: border-box;
+}
+
+.Grid td[robot] {
+  background-image: url('./robot.png');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .Grid td[top] {
